@@ -1,9 +1,9 @@
-name: Deploy Frontend to Azure Blob Storage
+name: Deploy HTML Frontend to Azure Blob Storage
 
 on:
   push:
     branches:
-      - main  # Deploys when changes are pushed to main branch
+      - main  # Runs when code is pushed to the main branch
 
 jobs:
   deploy:
@@ -13,20 +13,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build the React App
-      run: npm run build
-
-    - name: Upload to Azure Blob Storage
+    - name: Upload HTML files to Azure Blob Storage
       uses: azure/CLI@v1
       with:
         inlineScript: |
           az login --service-principal -u ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} -p ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }} --tenant YOUR_TENANT_ID
-          az storage blob upload-batch --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination \$web --source ./build --overwrite
+          az storage blob upload-batch --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination \$web --source ./ --overwrite
