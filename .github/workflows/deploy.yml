@@ -13,9 +13,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Upload HTML files to Azure Blob Storage
-      uses: azure/CLI@v1
-      with:
-        inlineScript: |
-          az login --service-principal -u ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} -p ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }} --tenant YOUR_TENANT_ID
-          az storage blob upload-batch --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination \$web --source ./ --overwrite
+    - name: Upload to Azure Blob Storage
+      run: |
+        az storage blob upload-batch \
+          --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} \
+          --account-key ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }} \
+          --destination \$web \
+          --source ./ \
+          --overwrite
