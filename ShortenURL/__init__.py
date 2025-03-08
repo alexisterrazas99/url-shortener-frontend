@@ -23,4 +23,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     short_code = str(uuid.uuid4())[:6]  # Generate a 6-character unique ID
     container.create_item({"id": short_code, "shortCode": short_code, "longUrl": long_url})
 
-    return func.HttpResponse(json.dumps({"shortUrl": f"https://<your-function-app-name>.azurewebsites.net/api/{short_code}"}), status_code=200)
+    return func.HttpResponse(json.dumps({"shortUrl": f"https://urlshortener-functions-new.azurewebsites.net/api/{short_code}"}), status_code=200)

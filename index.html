@@ -14,7 +14,7 @@
     <script>
         async function shortenUrl() {
             const longUrl = document.getElementById("longUrl").value;
-            const API_BASE_URL = "https://your-function-name.azurewebsites.net/api/ShortenURL"; // Replace with actual Azure Function URL
+            const API_BASE_URL = "https://urlshortener-functions-new.azurewebsites.net/api/ShortenURL"; 
 
             const response = await fetch(API_BASE_URL, {
                 method: "POST",
