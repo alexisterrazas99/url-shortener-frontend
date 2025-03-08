@@ -3,10 +3,10 @@ import json
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     if req.method == "OPTIONS":
-        # Handle preflight requests
+        # Preflight response
         return func.HttpResponse(
             "",
-            status_code=200,
+            status_code=204,
             headers={
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -20,8 +20,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     if not long_url:
         return func.HttpResponse("Invalid Request", status_code=400)
 
-    short_code = "abc123"  # Replace with real short URL logic
-    short_url = f"https://urlshortener-functions-new.azurewebsites.net/api/{short_code}"
+    short_code = "abc123"
+    short_url = f"https://your-function-app.azurewebsites.net/api/{short_code}"
 
     return func.HttpResponse(
         json.dumps({"shortUrl": short_url}),
